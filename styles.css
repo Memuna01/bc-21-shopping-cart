@@ -49,8 +49,9 @@ nav ul li a:hover{
     max-width: 100%;
 }
 
-.categories{
-    display: inline-block;
+.categories-container{
+    /*display: inline-block;*/
+    float: left;
     width: 15%;
     border-right: 3px solid #ccc;
     margin: 2px;
@@ -58,16 +59,18 @@ nav ul li a:hover{
     height: 500px;
 }
 
-.shop{
-    display: inline-block;
+.shop-container{
+    /*display: inline-block;*/
+    float: left;
     width: 45%;
-    margin: 2px; 
+    margin: 15px 15px 0px 15px; 
     text-align: center;
 }
 
-.cart{
-    display: inline-block;
-    width: 27%;
+.cart-container{
+    /*display: inline-block;*/
+    float: left;
+    width: 30%;
     margin: 2px;
     text-align: center;
 }
@@ -90,4 +93,30 @@ nav ul li a:hover{
     padding: 10px 0px 10px 0px;
     margin: 10px;
     color: #000;
+}
+
+/*.shop-products{
+    display: flex;
+    justify-content: center;
+}*/
+
+.products{
+    display: inline-block;
+    margin: 20px;
+    height: 30px;
+}
+
+.cart-body{
+    border: 2px solid #bbb;
+    background-color: #ccc;
+    margin: 20px;
+}
+
+.drag-to-cart a{
+    text-decoration: none;
+}
+
+.cart-body a{
+    text-decoration: none;
+    text-align: justify;
 }

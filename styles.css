@@ -1,0 +1,93 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+
+nav{
+    background-color: #333;
+    overflow: hidden;
+    margin: 0
+}
+
+nav ul{
+    margin: 2px;
+    padding: 2px;
+    display: flex;
+}
+
+nav ul li{
+    display: inline-block;
+    list-style-type: none;
+}
+
+nav ul li a{
+    text-decoration: none;
+    display: block;
+    color: #f2f2f2;
+    padding: 10px 5px;
+}
+
+nav ul li:first-child{
+    margin-right: auto;
+}
+
+nav ul li a.logo {
+    font-size: 21px;
+}
+
+nav ul li a:hover{
+    background-color: #bbb;
+    color: #000;
+}
+
+#logo-span{
+    color: #4CAF50;
+}
+
+.main-container{
+    max-width: 100%;
+}
+
+.categories{
+    display: inline-block;
+    width: 15%;
+    border-right: 3px solid #ccc;
+    margin: 2px;
+    text-align: left;
+    height: 500px;
+}
+
+.shop{
+    display: inline-block;
+    width: 45%;
+    margin: 2px; 
+    text-align: center;
+}
+
+.cart{
+    display: inline-block;
+    width: 27%;
+    margin: 2px;
+    text-align: center;
+}
+
+.products-list{
+    margin: 3px;
+}
+
+.products-list ul li {
+    list-style-type: none;
+    margin: 10px;
+    background-color: #4CAF50;
+    padding: 10px;
+    border-radius: 5px;
+
+}
+
+.products-list ul li a{
+    text-decoration: none;
+    padding: 10px 0px 10px 0px;
+    margin: 10px;
+    color: #000;
+}

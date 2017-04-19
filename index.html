@@ -24,7 +24,7 @@
 
         <div class="main-container">
             <!-- Categories of products -->
-            <div class="categories">
+            <div class="categories-container">
                 <div class="products-list">
                     <ul>
                         <li><a href="#" id="display-clothes" class="active">Clothes</a></li>
@@ -36,16 +36,57 @@
             </div>
 
             <!-- Shop -->
-            <div class="shop">
+            <div class="shop-container">
                 <div class="shop-products">
-                    
+                    <!--Clothes-->
+                    <div id="product1" class="products" draggable="true">
+                        <img class="product-images" draggable="false" src="images/bluegrecian.jpg" alt="">
+                        <div class="drag-to-cart">
+                            <a href="">Drag to Cart</a>
+                        </div>
+                        <h3>Blue Grecian</h3>
+                        <p class="product-price">N<span id="product1-price">8000</span></p>
+                    </div>
+                    <div id="product2" class="products" draggable="true">
+                        <img class="product-images" draggable="false" src="images/littleblackdress.jpg" alt="">
+                        <div class="drag-to-cart">
+                            <a href="">Drag to Cart</a>
+                        </div>
+                        <h3>Little Black Dress</h3>
+                        <p class="product-price">N<span id="product2-price">2500</span></p>                     
+                    </div>
+                
+                    <div id="product3" class="products" draggable="true">
+                        <img class="product-images" draggable="false" src="images/oxbloodwrapdress.jpg" alt="">
+                        <div class="drag-to-cart">
+                            <a href="">Drag to Cart</a>
+                        </div>
+                        <h3>Oxblood Wrap Dress</h3>
+                        <p class="product-price">N<span id="product3-price">5000</span></p>
+
+                    </div>
+                    <div id="product4" class="products" draggable="true">
+                        <img class="product-images" draggable="false" src="images/whiteflairdress.jpg" alt="">
+                        <div class="drag-to-cart">
+                            <a href="">Drag to Cart</a>
+                        </div>
+                        <h3>White Flair Dress</h3>
+                        <p class="product-price">N<span id="product4-price">6000</span></p>
+                    </div>
                 </div>
             </div>
 
             <!-- Cart -->
-            <div class="cart">
-                <p>I'm in california</p>
+            <div class="cart-container">
+                <div class="cart-body">
+                     <div class="cart-image">
+                        <img src="images/cart.png" alt="" height="350px" width="350px">                    
+                    </div>
+                    <h3><a href="">View Cart</a></h3>
+                </div>
             </div>
+
+            
         </div>
 
     </body>

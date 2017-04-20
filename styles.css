@@ -70,10 +70,9 @@ nav ul li a:hover{
 .cart-container{
     /*display: inline-block;*/
     float: left;
-    width: 35%;
-    margin: 15px 1%;
+    width: 32%;
+    margin: 15px 2%;
     text-align: center;
-    overflow: scroll;
 }
 
 .products-list{
@@ -112,12 +111,13 @@ nav ul li a:hover{
     background-image: url(./images/cart.png);
     border: 1px solid #eee;
     background-color: #fff;
-    margin: 0px 20px 10px 20px;
+    margin: 0px 30px 10px 20px;
     width: 100%;
-    min-height: 300px;
+    min-height: 130px;
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
+    overflow: scroll;
 }
 
 .drag-to-cart a{
@@ -130,13 +130,24 @@ nav ul li a:hover{
 }
 
 .top-of-cart{
-    margin: 30px 20px 0px 20px;
+    margin: 30px 30px 0px 20px;
     background-color: lightgoldenrodyellow;
-    height: 40px;
+    height: 60px;
     width: 100%;
-
+    padding-top: 10px;
 }
 
 .drag-enter{
   border: 1px solid #333;
+}
+
+.view-cart-items h3{
+    clear: both;
+    margin: 30px 30px 0px 20px;
+    color: #000;
+    background-color: #ddd;
+    height: auto;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

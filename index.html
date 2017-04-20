@@ -40,54 +40,65 @@
                 <div class="shop-products">
                     <!--Clothes-->
                     <div id="product1" class="products" draggable="true">
-                        <img class="product-images" draggable="false" src="images/bluegrecian.jpg" alt="">
+                        <img id="blue-grecian" class="product-images" draggable="false" src="images/bluegrecian.jpg" alt="">
                         <div class="drag-to-cart">
                             <a href="">Drag to Cart</a>
                         </div>
                         <h3>Blue Grecian</h3>
-                        <p class="product-price">N<span id="product1-price">8000</span></p>
+                        <p class="price">N<span id="product-price">8000</span></p><p class="number"></p>
                     </div>
                     <div id="product2" class="products" draggable="true">
-                        <img class="product-images" draggable="false" src="images/littleblackdress.jpg" alt="">
+                        <img id="little-black-dress" class="product-images" draggable="false" src="images/littleblackdress.jpg" alt="">
                         <div class="drag-to-cart">
                             <a href="">Drag to Cart</a>
                         </div>
                         <h3>Little Black Dress</h3>
-                        <p class="product-price">N<span id="product2-price">2500</span></p>                     
+                        <p class="price">N<span id="product-price">2500</span></p><p class="number"></p>                     
                     </div>
                 
                     <div id="product3" class="products" draggable="true">
-                        <img class="product-images" draggable="false" src="images/oxbloodwrapdress.jpg" alt="">
+                        <img id="oxblood-wrap-dress" class="product-images" draggable="false" src="images/oxbloodwrapdress.jpg" alt="">
                         <div class="drag-to-cart">
                             <a href="">Drag to Cart</a>
                         </div>
                         <h3>Oxblood Wrap Dress</h3>
-                        <p class="product-price">N<span id="product3-price">5000</span></p>
+                        <p class="price">N<span id="product-price">5000</span></p> <p class="number"></p>
 
                     </div>
                     <div id="product4" class="products" draggable="true">
-                        <img class="product-images" draggable="false" src="images/whiteflairdress.jpg" alt="">
+                        <img id="white-flair-dress" class="product-images" draggable="false" src="images/whiteflairdress.jpg" alt="">
                         <div class="drag-to-cart">
                             <a href="">Drag to Cart</a>
                         </div>
                         <h3>White Flair Dress</h3>
-                        <p class="product-price">N<span id="product4-price">6000</span></p>
+                        <p class="price">N<span id="product-price">6000</span></p><p class="number"></p>
                     </div>
                 </div>
             </div>
 
             <!-- Cart -->
-            <div class="cart-container">
-                <div class="cart-body">
-                     <div class="cart-image">
-                        <img src="images/cart.png" alt="" height="350px" width="350px">                    
-                    </div>
-                    <h3><a href="">View Cart</a></h3>
+            <div id="cart" class="cart-container">
+                <div class="top-of-cart">
+                    <span id="number-of-items"></span> Items in Cart
+                </div>
+
+                <div class="cart-body" id="target">
+                </div>
+                <div id="view-cart-items" class="view-cart-items">
+                    <ul>
+                        <p>its me</p>
+                    </ul>
                 </div>
             </div>
 
-            
+            <!--<a href="#oxblood-wrap-dress">View</a>-->
+
         </div>
+
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.0.min.js"></script>
+
+        <script src="index.js"></script>
+
 
     </body>
 </html>

@@ -52,7 +52,7 @@ nav ul li a:hover{
 .categories-container{
     /*display: inline-block;*/
     float: left;
-    width: 15%;
+    width: 20%;
     border-right: 3px solid #ccc;
     margin: 2px;
     text-align: left;
@@ -62,7 +62,7 @@ nav ul li a:hover{
 .shop-container{
     /*display: inline-block;*/
     float: left;
-    width: 45%;
+    width: 40%;
     margin: 15px 15px 0px 15px; 
     text-align: center;
 }
@@ -70,8 +70,8 @@ nav ul li a:hover{
 .cart-container{
     /*display: inline-block;*/
     float: left;
-    width: 30%;
-    margin: 2px;
+    width: 32%;
+    margin: 15px 2%;
     text-align: center;
 }
 
@@ -106,10 +106,18 @@ nav ul li a:hover{
     height: 30px;
 }
 
-.cart-body{
-    border: 2px solid #bbb;
-    background-color: #ccc;
-    margin: 20px;
+#target{
+    clear: both;
+    background-image: url(./images/cart.png);
+    border: 1px solid #eee;
+    background-color: #fff;
+    margin: 0px 30px 10px 20px;
+    width: 100%;
+    min-height: 130px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    overflow: scroll;
 }
 
 .drag-to-cart a{
@@ -119,4 +127,27 @@ nav ul li a:hover{
 .cart-body a{
     text-decoration: none;
     text-align: justify;
+}
+
+.top-of-cart{
+    margin: 30px 30px 0px 20px;
+    background-color: lightgoldenrodyellow;
+    height: 60px;
+    width: 100%;
+    padding-top: 10px;
+}
+
+.drag-enter{
+  border: 1px solid #333;
+}
+
+.view-cart-items h3{
+    clear: both;
+    margin: 30px 30px 0px 20px;
+    color: #000;
+    background-color: #ddd;
+    height: auto;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

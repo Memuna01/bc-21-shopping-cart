@@ -173,9 +173,9 @@ $(document).ready(function(){
         }
     }
     
-    function removeItemFromCart(item_id){
-        item_id = '#' + item_id;
-    }
+    // function removeItemFromCart(item_id){
+    //     item_id = '#' + item_id;
+    // }
 
     //drag and drop event handlers
     function dragstart_handler(event) {

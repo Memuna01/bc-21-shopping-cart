@@ -6,21 +6,53 @@ $(document).ready(function(){
     var totalPrice = $('#total-price'); 
     var list = $('#list-of-items');
     var products = JSON.parse(localStorage.getItem('shoppingCart'));
+    var productData = [];
 
+    (function setProductsData(){
+        var sum_counter = 0;
+        var price_counter = 0;
+        if(products.length){
+            for(var i = 0; i < products.length; i++){
+                sum_counter += parseInt(products[i]["quantity"]);
+                price_counter += parseInt(products[i]["price"]);
+            }
+
+            products_data = {"sum_counter": sum_counter, "price_counter": price_counter };
+            productData.push(products_data);
+
+            localStorage.setItem("productData", JSON.stringify(productData));
+         }
+    })();
+
+    (function updateProductsData(){
+        var parsedProductData = JSON.parse(localStorage.getItem('productData'));
+
+        if(parsedProductData){
+            for(var i = 0; i < parsedProductData.length; i++){
+                counter.html(parsedProductData[i]["sum_counter"]);
+                totalPrice.html(parsedProductData[i]["price_counter"]);
+            }
+        }
+    })();
 
     (function displayCartItems(){
         var products = JSON.parse(localStorage.getItem('shoppingCart'));
         if(products) {
-            var items ="Item" + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Quantity of item" + "<br>";
+            var items ="Item" + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Price of item" 
+            + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Quantity of item" + "<br>";
             for (var i = 0; i < products.length; i++){
-                items += products[i]["name"] + ":" 
-                 + "&emsp;&emsp;&emsp;&emsp;&emsp;" + products[i]["quantity"]; 
+                if(products[i]["name"] === undefined && products[i]["quantity"] === undefined){
+                    continue;
+                } else{
+                    items += products[i]["name"] + ":" 
+                    + "&emsp;&emsp;&emsp;&emsp;&emsp;" + products[i]["quantity"]; 
 
-                 items += "<br><br>";
+                    items += "<br><br>";
+                }   
             }
 
-            items += `Want to delete an item?<br><br>
-            <input type="text" id="delete-item" name="" value="" placeholder="Enter item to delete: ">
+            items += `Want to delete an item?<br>
+            <input type="text" id="delete-item" name="" value="" placeholder="Title Case e.g Blue Grecian ">
             <input id="delete-item-button" type="button" name="" value="Delete Item">`;
             list.html(items);
         }
@@ -35,8 +67,8 @@ $(document).ready(function(){
                 if(products[i]["quantity"] > 1){
                     products[i]["quantity"] -= 1;
                 }else{
-                    delete products[i]["name"];
-                    delete products[i]["quantity"];
+                    delete products[i];
+                    // delete products[i]["quantity"];
                 }
             }
         }
@@ -47,7 +79,7 @@ $(document).ready(function(){
     function addItemToCart(item_id){
         var new_id = item_id + '-cart';
         var cart_item = $('#' + new_id);
-        var products = JSON.parse(localStorage.getItem('shoppingCart'));
+        var products = "";
         console.log("cart item: ", cart_item.html());
 
         //checking if item is already in the cart
@@ -59,37 +91,76 @@ $(document).ready(function(){
 
             $('#target').append(storeItem);
             $('#' + new_id + '.number').html('1');
+            //$(storeItem + "img").style.visibility = "hidden";
 
-            counter.html(parseInt(counter.html()) + 1);
+            // counter.html(parseInt(counter.html()) + 1);
             totalPrice.html(parseFloat(totalPrice.html()) + parseFloat($(storeItem).find('.product-price').html())); 
 
             storeItem.addEventListener('dragend', dragleave_handler);
 
             console.log("storeItem: ", storeItem);
             var item_name = $(storeItem).find('.title-of-product').html();
-            console.log("item_name: ", item_name);
 
-            var product = { "name": item_name, "quantity": 1 };
+            console.log("item_name: ", item_name);
+            var price = $(storeItem).find('.product-price').html();
+            //creating object to push to local storage
+            var product = { "id": 1, "name": item_name, "price": price, "quantity": 1 };
 
             shoppingCart.push(product);
 
+            //pushing item to local storage
             localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            //getting item from local storage
+            var products = JSON.parse(localStorage.getItem('shoppingCart'));
+
+            //updating total number of items in cart
+            var sum_count = 0;
+
+            //checking if there is actually something pushed to local storage
+            if(products.length){
+                console.log("product length: ", products.length);
+                console.log("products available");
+                for(var i = 0; i < products.length; i++){
+                    sum_count += products[i]["quantity"];
+                }
+
+                // sum_count += 1;
+                counter.html(sum_count);
+            }else{
+                for(var i = 0; i < products.length; i++){
+                    sum_count = products[i]["quantity"];
+                }
+                counter.html(sum_count);
+            }
 
         } else{
             //item is in cart, update item
             var storeItem = document.getElementById(item_id).cloneNode(true);
 
-            counter.html(parseInt(counter.html()) + 1);
-            console.log("counter if item in cart: ", counter.html());
+            // counter.html(parseInt(counter.html()) + 1);
+            // console.log("counter if item in cart: ", counter.html());
 
             
-            console.log("total price if item is in cart: ", totalPrice.html());
+            // console.log("total price if item is in cart: ", totalPrice.html());
 
-            totalPrice.html(parseFloat(totalPrice.html()) + parseFloat($(storeItem).find('.product-price').html())); 
-            console.log("total price if item is in cart: ", totalPrice.html());
+            // totalPrice.html(parseFloat(totalPrice.html()) + parseFloat($(storeItem).find('.product-price').html())); 
+            // console.log("total price if item is in cart: ", totalPrice.html());
 
             var item_name = $(storeItem).find('.title-of-product').html();
             var update_cart = JSON.parse(localStorage.getItem('shoppingCart'));
+            var products = JSON.parse(localStorage.getItem('shoppingCart'));
+            var sum_count = 0;
+            if(products){
+                console.log("products available...again");
+                for(var i = 0; i < products.length; i++){
+                    sum_count += products[i]["quantity"];
+                }
+
+                sum_count += 1;
+            }
+
+            counter.html(sum_count);
             for(var i = 0; i < update_cart.length; i++){
                 if(update_cart[i].name === item_name){
                     update_cart[i].quantity = parseInt(update_cart[i].quantity) + 1;
@@ -143,7 +214,7 @@ $(document).ready(function(){
         // $('.cart-container').removeClass('drag-enter');
     }
 
-     //add event listener to shopping cart
+     //add event listener to all shop products
 
     for(var i = 0; i < draggableItems.length; i++){
         draggableItems[i].addEventListener('dragstart', dragstart_handler);
@@ -172,6 +243,7 @@ $(document).ready(function(){
        //console.log("event slice", (event.target.id).slice(8));
   });
 
+  //delete item from cart
    $('#delete-item-button').on('click', function(){
        delete_product_item();
 

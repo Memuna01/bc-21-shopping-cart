@@ -74,6 +74,8 @@ nav ul li a:hover{
     width: 32%;
     margin: 10px 2%;
     text-align: center;
+    /*position: fixed;
+    right: 40px;*/
 }
 
 .shop-container img{
@@ -85,6 +87,7 @@ nav ul li a:hover{
 }
 
 .products-list ul li {
+    text-align: center;
     list-style-type: none;
     margin: 10px;
     background-color: #4CAF50;

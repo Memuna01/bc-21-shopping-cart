@@ -5,19 +5,44 @@ $(document).ready(function(){
     var counter = $('#count-of-items');
     var totalPrice = $('#total-price'); 
     var list = $('#list-of-items');
+    var products = JSON.parse(localStorage.getItem('shoppingCart'));
 
 
     (function displayCartItems(){
         var products = JSON.parse(localStorage.getItem('shoppingCart'));
         if(products) {
-            var items ="";
+            var items ="Item" + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Quantity of item" + "<br>";
             for (var i = 0; i < products.length; i++){
-                items += products[i]["name"] + ":" + products[i]["quantity"];
-                items += "<br>";
+                items += products[i]["name"] + ":" 
+                 + "&emsp;&emsp;&emsp;&emsp;&emsp;" + products[i]["quantity"]; 
+
+                 items += "<br><br>";
             }
+
+            items += `Want to delete an item?<br><br>
+            <input type="text" id="delete-item" name="" value="" placeholder="Enter item to delete: ">
+            <input id="delete-item-button" type="button" name="" value="Delete Item">`;
             list.html(items);
         }
     })();
+
+    console.log(list.html());
+   
+    function delete_product_item(){
+        var delete_item = $('#delete-item').val();
+        for(var i = 0; i < products.length; i++){
+            if(delete_item === products[i]["name"]){
+                if(products[i]["quantity"] > 1){
+                    products[i]["quantity"] -= 1;
+                }else{
+                    delete products[i]["name"];
+                    delete products[i]["quantity"];
+                }
+            }
+        }
+
+        localStorage.setItem("shoppingCart", JSON.stringify(products));
+     }
 
     function addItemToCart(item_id){
         var new_id = item_id + '-cart';
@@ -134,22 +159,23 @@ $(document).ready(function(){
         var active_class = $('.active');
         var slice_clicked_class = id.slice(8);
         var clicked_class = $('.' + slice_clicked_class);
-        //console.log("clicked class slice: ", $(clicked_class));
 
         $('.products-list a').removeClass('active');
         clicked_class.addClass('active');
          $('.products').hide();
         clicked_class.show();
-
-        // console.log(id)
-        // $('.category').hide();
-        // if($('#' + id.slice(8)) === $('#' + id + "."));
   }
 
     //Show shop items by categories
    $('.products-list a').on('click', function(event){
        showByCategory(event.target.id);
        //console.log("event slice", (event.target.id).slice(8));
+  });
+
+   $('#delete-item-button').on('click', function(){
+       delete_product_item();
+
+       console.log("delete button working");
   });
 
 

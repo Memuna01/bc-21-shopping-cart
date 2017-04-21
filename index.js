@@ -8,7 +8,7 @@ $(document).ready(function(){
     var products = JSON.parse(localStorage.getItem('shoppingCart'));
     var productData = [];
 
-    (function updateProductsData(){
+    (function setProductsData(){
         var sum_counter = 0;
         var price_counter = 0;
         if(products.length){
@@ -38,7 +38,8 @@ $(document).ready(function(){
     (function displayCartItems(){
         var products = JSON.parse(localStorage.getItem('shoppingCart'));
         if(products) {
-            var items ="Item" + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Quantity of item" + "<br>";
+            var items ="Item" + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Price of item" 
+            + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Quantity of item" + "<br>";
             for (var i = 0; i < products.length; i++){
                 if(products[i]["name"] === undefined && products[i]["quantity"] === undefined){
                     continue;
@@ -66,8 +67,8 @@ $(document).ready(function(){
                 if(products[i]["quantity"] > 1){
                     products[i]["quantity"] -= 1;
                 }else{
-                    delete products[i]["name"];
-                    delete products[i]["quantity"];
+                    delete products[i];
+                    // delete products[i]["quantity"];
                 }
             }
         }
@@ -99,15 +100,24 @@ $(document).ready(function(){
 
             console.log("storeItem: ", storeItem);
             var item_name = $(storeItem).find('.title-of-product').html();
+
             console.log("item_name: ", item_name);
             var price = $(storeItem).find('.product-price').html();
+            //creating object to push to local storage
             var product = { "id": 1, "name": item_name, "price": price, "quantity": 1 };
 
             shoppingCart.push(product);
 
+            //pushing item to local storage
             localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+
+            //getting item from local storage
             var products = JSON.parse(localStorage.getItem('shoppingCart'));
+
+            //updating total number of items in cart
             var sum_count = 0;
+
+            //checking if there is actually something pushed to local storage
             if(products.length){
                 console.log("product length: ", products.length);
                 console.log("products available");
@@ -115,11 +125,11 @@ $(document).ready(function(){
                     sum_count += products[i]["quantity"];
                 }
 
-                sum_count += 1;
+                // sum_count += 1;
                 counter.html(sum_count);
             }else{
                 for(var i = 0; i < products.length; i++){
-                    sum_count += products[i]["quantity"];
+                    sum_count = products[i]["quantity"];
                 }
                 counter.html(sum_count);
             }

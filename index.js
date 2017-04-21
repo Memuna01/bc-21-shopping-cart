@@ -4,14 +4,26 @@ $(document).ready(function(){
     var shoppingCart = [];
     var counter = $('#count-of-items');
     var totalPrice = $('#total-price'); 
-        
+    var list = $('#list-of-items');
+
+
+    (function displayCartItems(){
+        var products = JSON.parse(localStorage.getItem('shoppingCart'));
+        if(products) {
+            var items ="";
+            for (var i = 0; i < products.length; i++){
+                items += products[i]["name"] + ":" + products[i]["quantity"];
+                items += "<br>";
+            }
+            list.html(items);
+        }
+    })();
 
     function addItemToCart(item_id){
         var new_id = item_id + '-cart';
         var cart_item = $('#' + new_id);
         var products = JSON.parse(localStorage.getItem('shoppingCart'));
         console.log("cart item: ", cart_item.html());
-        var list = $('#list-of-items');
 
         //checking if item is already in the cart
         if(cart_item.html() === undefined){
@@ -52,59 +64,21 @@ $(document).ready(function(){
             console.log("total price if item is in cart: ", totalPrice.html());
 
             var item_name = $(storeItem).find('.title-of-product').html();
-            var products = JSON.parse(localStorage.getItem('shoppingCart'));
-            for(var i = 0; i < products.length; i++){
-                if(products[i].name === item_name){
-                    products[i].quantity = parseInt(products[i].quantity) + 1;
+            var update_cart = JSON.parse(localStorage.getItem('shoppingCart'));
+            for(var i = 0; i < update_cart.length; i++){
+                if(update_cart[i].name === item_name){
+                    update_cart[i].quantity = parseInt(update_cart[i].quantity) + 1;
                     break;
                 }
             }
             
 
-            localStorage.setItem("shoppingCart", JSON.stringify(products));
+            localStorage.setItem("shoppingCart", JSON.stringify(update_cart));
         }
-            console.log(products);
-            //console.log(list);
-            // list.html( '<h3>' + "hello" + '</h3>');
-
-            // for(var i = 0; i < products.length; i++){
-            //     for(var prop in products[i])
-            //     {
-            //         console.log(products[i][prop]);
-            //         console.log("prop", prop)
-            //         list.html( 
-            //         '<ul>' + 
-            //         '<li>' + prop +":" +products[prop] +
-            //          '</li>' + 
-            //         '</ul>');
-            //     }
-            // }
-
-            products.forEach(function(product){
-            
-                for(key in  product){
-                    console.log("key", key);
-                     //console.log(products[i][prop]);
-                    //console.log("prop", prop)
-                    list.html( 
-                    '<ul>' + 
-                    '<li>' + key +":" +product[key].name +
-                     '</li>' + 
-                    '</ul>');
-                }
-            })
     }
     
     function removeItemFromCart(item_id){
         item_id = '#' + item_id;
-        // var number = $(item).find('.number').html();
-        // console.log("number in removeItemFromCart: ", number);
-
-        // if(parseInt(number.html()) > 1){
-        //     number.html(number.html() - 1);
-        // } else{
-        //     $(item_id).remove();
-        // }
     }
 
     //drag and drop event handlers
@@ -155,6 +129,28 @@ $(document).ready(function(){
     cart.addEventListener('dragover', allowDrop);
     cart.addEventListener('drop', drop_handler);
     cart.addEventListener('dragleave', dragleave_handler);
+
+    function showByCategory(id){
+        var active_class = $('.active');
+        var slice_clicked_class = id.slice(8);
+        var clicked_class = $('.' + slice_clicked_class);
+        //console.log("clicked class slice: ", $(clicked_class));
+
+        $('.products-list a').removeClass('active');
+        clicked_class.addClass('active');
+         $('.products').hide();
+        clicked_class.show();
+
+        // console.log(id)
+        // $('.category').hide();
+        // if($('#' + id.slice(8)) === $('#' + id + "."));
+  }
+
+    //Show shop items by categories
+   $('.products-list a').on('click', function(event){
+       showByCategory(event.target.id);
+       //console.log("event slice", (event.target.id).slice(8));
+  });
 
 
 });

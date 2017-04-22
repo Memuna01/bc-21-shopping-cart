@@ -16,7 +16,7 @@ $(document).ready(function(){
         "product11-cart":{"name":"Peach Easybag","price":5000},"product12-cart":{"name":"Brown Leather Schoolbag","price":9000}};
 
 
-
+localStorage.clear();
     (function setProductsData(){
         var sum_counter = 0;
         var price_counter = 0;
@@ -120,15 +120,6 @@ $(document).ready(function(){
         console.log("id", id);
         var delete_link = id.slice(0, 13);
         console.log("delete_link" , delete_link);
-         var cartData = JSON.parse(localStorage.getItem('productData'));
-         for(var i = 0; i < cartData.length; i++){
-             if(cartData[i]["sum_counter"]  === null){
-                 cartData[i]["sum_counter"] = 0;
-             }
-            if(cartData[i]["price_counter"]  === null){
-                 cartData[i]["price_counter"] = 0;
-             }
-         }
         if(products){
             for(var i = 0; i < products.length; i++){
                 if(products[i] === null){
@@ -137,8 +128,6 @@ $(document).ready(function(){
                 if(delete_link === products[i]["id"]){
                     if((products[i]["quantity"]) > 1){
                         products[i]["quantity"] -= 1;
-                        cartData[0][sum_counter] -= 1;
-                        cartData[1][price_counter] -= products[i]["quantity"];
 
                     }else{
                         delete products[i]["name"];
@@ -152,7 +141,6 @@ $(document).ready(function(){
        
             
         localStorage.setItem("shoppingCart", JSON.stringify(products));
-        localStorage.setItem("productData", JSON.stringify(cartData));
 
      }
 
@@ -227,7 +215,6 @@ $(document).ready(function(){
 
         $(list).find(id).on('click', function(event){
             delete_product_item(event.target.id);
-            alert("You have just deleted an item from your cart");
         });
     }
    }

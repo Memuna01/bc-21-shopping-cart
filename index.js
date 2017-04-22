@@ -16,7 +16,7 @@ $(document).ready(function(){
         "product9-cart":{"name":"Multi-Colored Schoolbag","price":8000},"product10-cart":{"name":"Orange Multipurpose","price":8000},
         "product11-cart":{"name":"Peach Easybag","price":5000},"product12-cart":{"name":"Brown Leather Schoolbag","price":9000}};
 
-
+    localStorage.clear();
     (function setProductsData(){
         var sum_counter = 0;
         var price_counter = 0;
@@ -54,7 +54,8 @@ $(document).ready(function(){
     function displayCartItems(){
         var products = JSON.parse(localStorage.getItem('shoppingCart'));
         if(products) {
-            var items ="Item" + "&emsp;&emsp;&emsp;&emsp;" + "Price of item" 
+            var items = "<th>" + "<td>" + "Item" + "</td>" + "<td>" + "Item" + "</td>" +
+             + "&emsp;&emsp;&emsp;&emsp;" + "Price of item" 
             + "&emsp;&emsp;&emsp;&emsp;" + "Quantity of item" + "<br>";
             for (var i = 0; i < products.length; i++){
                 if(products[i] === null){

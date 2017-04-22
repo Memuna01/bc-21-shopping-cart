@@ -53,10 +53,10 @@ nav ul li a:hover{
     /*display: inline-block;*/
     float: left;
     width: 17%;
-    border-right: 3px solid #ccc;
-    margin: 2px;
+    border-right: 3px solid #eee;
+    margin-top: 15px;
     text-align: left;
-    height: 800px;
+    height: 2000px;
     cursor: pointer;
 }
 
@@ -66,6 +66,7 @@ nav ul li a:hover{
     width: 43%;
     margin: 15px 0px 0px 0px; 
     text-align: center;
+    height: auto;
 }
 
 .cart-container{
@@ -74,8 +75,7 @@ nav ul li a:hover{
     width: 32%;
     margin: 10px 2%;
     text-align: center;
-    /*position: fixed;
-    right: 40px;*/
+    height: auto;
 }
 
 .shop-container img{
@@ -91,16 +91,16 @@ nav ul li a:hover{
     list-style-type: none;
     margin: 10px;
     background-color: #4CAF50;
-    padding: 10px;
     border-radius: 5px;
+    padding: 5px;
 
 }
 
 .products-list ul li a{
     text-decoration: none;
-    padding: 10px 0px 10px 0px;
     margin: 10px;
     color: #000;
+    display: block;
 }
 
 /*.shop-products{
@@ -139,7 +139,7 @@ nav ul li a:hover{
 
 .top-of-cart{
     margin: 30px 30px 0px 20px;
-    background-color: #ddd;
+    background-color: #eee;
     color: #000;
     height: auto;
     width: 100%;
@@ -154,7 +154,7 @@ nav ul li a:hover{
     clear: both;
     margin: 30px 30px 0px 20px;
     color: #000;
-    background-color: #ddd;
+    background-color: #eee;
     height: auto;
     width: 100%;
     padding-top: 5px;
@@ -165,5 +165,12 @@ nav ul li a:hover{
     margin-left: 5%;
 }
 #list-of-items a{
-    cursor: pointer
+    cursor: pointer;
+}
+
+.footer{
+    clear: both;
+    background-color: #ddd;
+    margin-top: 10px;
+    padding: 20px;
 }

@@ -20,10 +20,14 @@ $(document).ready(function(){
     (function setProductsData(){
         var sum_counter = 0;
         var price_counter = 0;
-        if(products.length){
+        if(products){
             for(var i = 0; i < products.length; i++){
+                if(products[i] === undefined){
+                    continue;
+                }
                 sum_counter += products[i]["quantity"];
                 price_counter += products[i]["price"];
+
             }
 
             var products_data = {"sum_counter": sum_counter, "price_counter": price_counter };
@@ -31,9 +35,11 @@ $(document).ready(function(){
 
             localStorage.setItem("productData", JSON.stringify(productData));
          }
+         updateProductsData();
     })();
 
-    (function updateProductsData(){
+
+    function updateProductsData(){
         var parsedProductData = JSON.parse(localStorage.getItem('productData'));
 
         if(parsedProductData){
@@ -42,48 +48,50 @@ $(document).ready(function(){
                 totalPrice.html(parsedProductData[i]["price_counter"]);
             }
         }
-    })();
+    }
 
     displayCartItems();
-    
     function displayCartItems(){
         var products = JSON.parse(localStorage.getItem('shoppingCart'));
         if(products) {
             var items ="Item" + "&emsp;&emsp;&emsp;&emsp;" + "Price of item" 
             + "&emsp;&emsp;&emsp;&emsp;" + "Quantity of item" + "<br>";
             for (var i = 0; i < products.length; i++){
-                if(products[i]["name"] === undefined && products[i]["quantity"] === undefined){
+                if(products[i] === null){
+                    continue;
+                }else if(products[i]["name"] === undefined && products[i]["quantity"] === undefined){
                     continue;
                 } else{
-                    items += products[i]["name"] + ":" 
-                    + "&emsp;&emsp;&emsp;&emsp;&emsp;" + products[i]["quantity"]; 
-
-                    items += "<br><br>";
+                    items += products[i]["name"] + ":" + products[i]["price"] 
+                    + "&emsp;&emsp;&emsp;&emsp;&emsp;" + products[i]["quantity"]
+                    + `<a title="delete item"><i id=${products[i]["id"]}-link class="fa fa-trash"></i></a>`; 
                 }   
             }
 
-            items += `Want to delete an item?<br>
-            <input type="text" id="delete-item" name="" value="" placeholder="Title Case e.g Blue Grecian ">
-            <input id="delete-item-button" type="button" name="" value="Delete Item">`;
-            list.html(items);
+             list.html(items);
         }
     };
 
     console.log(list.html());
    
-    function delete_product_item(){
-        var delete_item = $('#delete-item').val();
-        for(var i = 0; i < products.length; i++){
-            if(delete_item === products[i]["name"]){
-                if(products[i]["quantity"] > 1){
-                    products[i]["quantity"] -= 1;
-                }else{
-                    delete products[i];
-                    // delete products[i]["quantity"];
+    function delete_product_item(id){
+        console.log("id", id);
+        var delete_link = id.slice(0, 13);
+        console.log("delete_link" , delete_link);
+        if(products){
+            for(var i = 0; i < products.length; i++){
+                if(products[i] === null){
+                    continue;
+                }
+                if(delete_link === products[i]["id"]){
+                    if(products[i]["quantity"] > 1){
+                        products[i]["quantity"] -= 1;
+                    }else{
+                        products[i] = undefined;
+                    }
                 }
             }
         }
-
         localStorage.setItem("shoppingCart", JSON.stringify(products));
      }
 
@@ -94,6 +102,9 @@ $(document).ready(function(){
             return false;
         }
         for(var i=0;i<currentCart.length;i++){
+            if(currentCart[i] === null){
+                continue;
+            }
             if(currentCart[i]["name"]==productIds[item_id]["name"]){
                 return true;
             }
@@ -119,18 +130,19 @@ $(document).ready(function(){
             //item is in cart, update item
             var currentCart = JSON.parse(localStorage.getItem('shoppingCart'));
             for(var i=0;i<currentCart.length;i++){
-                if(currentCart[i]["name"]==productIds[new_id]["name"]){
-                    currentCart[i]["quantity"]+=1;
+                if(currentCart[i] === null){
+                    continue;
+                } else{
+
+                    if(currentCart[i]["name"]==productIds[new_id]["name"]){
+                        currentCart[i]["quantity"]+=1;
+                    }
                 }
             }
             localStorage.setItem("shoppingCart", JSON.stringify(currentCart));
         }
     }
     
-    function removeItemFromCart(item_id){
-        item_id = '#' + item_id;
-    }
-
     //drag and drop event handlers
     function dragstart_handler(event) {
         console.log("dragStart");
@@ -155,9 +167,9 @@ $(document).ready(function(){
         if(event_id === '') return;
 
         addItemToCart(event_id);
+        updateProductsData();
         displayCartItems();
-        console.log("dropped: " + event_id);
-    }
+     }
 
     function dragOut(event){
         if (event.dataTransfer.dropEffect === 'none') {
@@ -195,15 +207,23 @@ $(document).ready(function(){
     //Show shop items by categories
    $('.products-list a').on('click', function(event){
        showByCategory(event.target.id);
-       //console.log("event slice", (event.target.id).slice(8));
   });
 
+// var get_id = $('list).find();
+// console.log("get_id", get_id);
   //delete item from cart
-   $('#delete-item-button').on('click', function(){
-       delete_product_item();
+  if(products){
+    for(var i = 0; i < products.length; i++){
+        if(products[i] === null){
+            continue;
+        }
 
-       console.log("delete button working");
-  });
+        var id = "#"+products[i]["id"] + "-link";
 
+        $(list).find(id).on('click', function(event){
+            delete_product_item(event.target.id);
+        });
+    }
+  }
 
 });

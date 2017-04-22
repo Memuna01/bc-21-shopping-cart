@@ -16,7 +16,7 @@ $(document).ready(function(){
         "product11-cart":{"name":"Peach Easybag","price":5000},"product12-cart":{"name":"Brown Leather Schoolbag","price":9000}};
 
 
-
+localStorage.clear();
     (function setProductsData(){
         var sum_counter = 0;
         var price_counter = 0;
@@ -215,7 +215,6 @@ $(document).ready(function(){
 
         $(list).find(id).on('click', function(event){
             delete_product_item(event.target.id);
-            alert("You have just deleted an item from your cart");
         });
     }
    }

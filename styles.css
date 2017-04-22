@@ -150,9 +150,13 @@ nav ul li a:hover{
   border: 1px solid #333;
 }
 
+.view-cart-items{
+    margin: 30px 40px 0px 20px;
+    width: 100%;
+}
+
 .view-cart-items h3{
     clear: both;
-    margin: 30px 30px 0px 20px;
     color: #000;
     background-color: #eee;
     height: auto;
@@ -162,15 +166,30 @@ nav ul li a:hover{
 }
 #list-of-items{
     text-align: left;
-    margin-left: 5%;
 }
 #list-of-items a{
     cursor: pointer;
 }
 
-.footer{
+/*.footer{
     clear: both;
     background-color: #ddd;
     margin-top: 10px;
     padding: 20px;
+}*/
+
+tr{
+    padding: 10px;
+    border: 2px solid #ccc;
+}
+
+table{
+    background-color: #eee;
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+}
+
+td{
+    text-align: left;
 }

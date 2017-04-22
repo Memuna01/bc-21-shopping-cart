@@ -9,17 +9,17 @@ $(document).ready(function(){
     var list = $('#list-of-items');
     var products = JSON.parse(localStorage.getItem('shoppingCart'));
     var productData = [];
-    var productIds = {"product1-cart":{"name":"blue-grecian","price":8000},"product2-cart":{"name":"little-black-dress","price":2500},
-"product3-cart":{"name":"Oxblood Wrap Dress","price":5000},"product4-cart":{"name":"White Flair Dress","price":6000},
-"product5-cart":{"name":"Black Platform Heels","price":12000},"product6-cart":{"name":"White Shoe Boot","price":8000},
-"product7-cart":{"name":"Brown Vintage","price":5000},"product8-cart":{"name":"Brown Flats","price":10000},
-"product9-cart":{"name":"Multi-Colored Schoolbag","price":8000},"product10-cart":{"name":"Orange Multipurpose","price":8000},
-"product11-cart":{"name":"Peach Easybag","price":5000},"product12-cart":{"name":"rown Leather Schoolbag","price":9000}};
+    var productIds = {"product1-cart":{"name":"Blue Grecian","price":8000},"product2-cart":{"name":"Little Black Dress","price":2500},
+        "product3-cart":{"name":"Oxblood Wrap Dress","price":5000},"product4-cart":{"name":"White Flair Dress","price":6000},
+        "product5-cart":{"name":"Black Platform Heels","price":12000},"product6-cart":{"name":"White Shoe Boot","price":8000},
+        "product7-cart":{"name":"Brown Vintage","price":5000},"product8-cart":{"name":"Brown Flats","price":10000},
+        "product9-cart":{"name":"Multi-Colored Schoolbag","price":8000},"product10-cart":{"name":"Orange Multipurpose","price":8000},
+        "product11-cart":{"name":"Peach Easybag","price":5000},"product12-cart":{"name":"rown Leather Schoolbag","price":9000}};
 
     (function setProductsData(){
         var sum_counter = 0;
         var price_counter = 0;
-        if(products.length){
+        if(products){
             for(var i = 0; i < products.length; i++){
                 sum_counter += parseInt(products[i]["quantity"]);
                 price_counter += parseInt(products[i]["price"]);
@@ -47,22 +47,20 @@ $(document).ready(function(){
     function displayCartItems(){
         var products = JSON.parse(localStorage.getItem('shoppingCart'));
         if(products) {
-            var items ="Item" + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Price of item" 
-            + "&emsp;&emsp;&emsp;&emsp;&emsp;" + "Quantity of item" + "<br>";
+            var items = "<table>";
+             items += "<td>" + "<h2>Item</h2>" + "</td>" + "<td>" + "<h2>Price</h2>" + "</td>" +"<td>" + "<h2>Quantity</h2>" + "</td>";
             for (var i = 0; i < products.length; i++){
                 if(products[i]["name"] === undefined && products[i]["quantity"] === undefined){
                     continue;
                 } else{
-                    items += products[i]["name"] + ":" 
-                    + "&emsp;&emsp;&emsp;&emsp;&emsp;" + products[i]["quantity"]; 
+                    items +="<tr>" + "<td>" + products[i]["name"] + "</td>" + "<td>" +products[i]["price"] + "</td>"
+                   + "&ensp;"  + "<td>" + products[i]["quantity"] + "</td>" +"<td>" + " " + "</td>"
+                    + "<td>" +  `<a title="delete item"><i id=${products[i]["id"]}-link class="fa fa-trash"></i></a>` 
+                    + "</td>" + "</tr>"; 
 
-                    items += "<br><br>";
                 }   
             }
-
-            items += `Want to delete an item?<br>
-            <input type="text" id="delete-item" name="" value="" placeholder="Title Case e.g Blue Grecian ">
-            <input id="delete-item-button" type="button" name="" value="Delete Item">`;
+            items += "</table>";
             list.html(items);
         }
     };
@@ -119,8 +117,8 @@ $(document).ready(function(){
                     continue;
                 }
                 if(delete_link === products[i]["id"]){
-                    if(products[i]["quantity"] > 1){
-                        products[i]["quantity"] -= 1;
+                    if(parseInt(products[i]["quantity"]) > 1){
+                        parseInt(products[i]["quantity"]) -= 1;
                     }else{
                         products[i] = undefined;
                     }
@@ -194,9 +192,9 @@ $(document).ready(function(){
     //Show shop items by categories
    $('.products-list a').on('click', function(event){
        showByCategory(event.target.id);
-       //console.log("event slice", (event.target.id).slice(8));
-  });
+   });
 
+   //delete item from cart
    if(products){
     for(var i = 0; i < products.length; i++){
         if(products[i] === undefined){

@@ -167,6 +167,7 @@ nav ul li a:hover{
 #list-of-items{
     text-align: left;
 }
+
 #list-of-items a{
     cursor: pointer;
 }
